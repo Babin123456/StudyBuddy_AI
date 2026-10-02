@@ -17,10 +17,12 @@ export async function checkHealth() {
 /**
  * Upload a file and generate study material.
  */
-export async function generateFromFile(file, model = 'gemma:2b') {
+export async function generateFromFile(file, model) {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('model', model);
+  if (model) {
+    formData.append('model', model);
+  }
 
   const res = await fetch(`${API_BASE}/generate`, {
     method: 'POST',
@@ -38,11 +40,14 @@ export async function generateFromFile(file, model = 'gemma:2b') {
 /**
  * Generate study material from raw text.
  */
-export async function generateFromText(text, model = 'gemma:2b') {
+export async function generateFromText(text, model) {
+  const payload = { text };
+  if (model) payload.model = model;
+
   const res = await fetch(`${API_BASE}/generate-text`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, model }),
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {

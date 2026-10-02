@@ -108,9 +108,10 @@ app.post('/api/generate', upload.single('file'), async (req, res) => {
       });
     }
 
-    // Determine model to use: use explicit model, or the first available Gemma model, or fallback
+    // Determine model to use: prefer installed Gemma model if requested model is unavailable
     const availableGemma = health.models?.find(m => m.toLowerCase().includes('gemma'));
-    const model = req.body.model || process.env.OLLAMA_MODEL || availableGemma || 'gemma:2b';
+    const isRequestedInstalled = req.body.model && health.models?.some(m => m === req.body.model);
+    const model = (isRequestedInstalled ? req.body.model : null) || process.env.OLLAMA_MODEL || availableGemma || 'gemma2:2b';
     console.log(`[StudyBuddy] Generating study material with model: ${model}`);
 
     // Generate via Ollama
@@ -179,7 +180,8 @@ app.post('/api/generate-text', async (req, res) => {
     }
 
     const availableGemma = health.models?.find(m => m.toLowerCase().includes('gemma'));
-    const selectedModel = model || process.env.OLLAMA_MODEL || availableGemma || 'gemma:2b';
+    const isRequestedInstalled = model && health.models?.some(m => m === model);
+    const selectedModel = (isRequestedInstalled ? model : null) || process.env.OLLAMA_MODEL || availableGemma || 'gemma2:2b';
     console.log(`[StudyBuddy] Text generation with ${selectedModel}, ${text.length} chars`);
 
     const rawResponse = await generateStudyMaterial(text.trim(), selectedModel);
