@@ -178,7 +178,8 @@ app.post('/api/generate-text', async (req, res) => {
       });
     }
 
-    const selectedModel = model || 'gemma:2b';
+    const availableGemma = health.models?.find(m => m.toLowerCase().includes('gemma'));
+    const selectedModel = model || process.env.OLLAMA_MODEL || availableGemma || 'gemma:2b';
     console.log(`[StudyBuddy] Text generation with ${selectedModel}, ${text.length} chars`);
 
     const rawResponse = await generateStudyMaterial(text.trim(), selectedModel);
