@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/* ─── Design System Tokens ──────────────────────────────── */
+@theme {
+  --font-serif: 'Cambria Math', 'Times New Roman', Times, 'Tinos', serif;
+  --font-sans: 'Cambria Math', 'Times New Roman', Times, 'Tinos', serif;
+  
+  --color-brand-50: oklch(0.97 0.02 280);
+  --color-brand-100: oklch(0.93 0.04 280);
+  --color-brand-200: oklch(0.87 0.07 280);
+  --color-brand-300: oklch(0.78 0.12 275);
+  --color-brand-400: oklch(0.68 0.17 270);
+  --color-brand-500: oklch(0.58 0.22 268);
+  --color-brand-600: oklch(0.50 0.22 268);
+  --color-brand-700: oklch(0.42 0.19 270);
+  --color-brand-800: oklch(0.35 0.15 272);
+  --color-brand-900: oklch(0.28 0.10 275);
+
+  --color-accent-400: oklch(0.78 0.18 165);
+  --color-accent-500: oklch(0.70 0.20 165);
+  --color-accent-600: oklch(0.60 0.18 165);
+
+  --color-surface-50: oklch(0.98 0.005 280);
+  --color-surface-100: oklch(0.96 0.008 280);
+  --color-surface-200: oklch(0.92 0.01 280);
+  --color-surface-700: oklch(0.30 0.02 275);
+  --color-surface-800: oklch(0.22 0.02 275);
+  --color-surface-900: oklch(0.15 0.02 275);
+  --color-surface-950: oklch(0.10 0.02 275);
+
+  --color-success: oklch(0.72 0.19 145);
+  --color-danger: oklch(0.65 0.22 25);
+  --color-warning: oklch(0.80 0.16 85);
+}
+
+/* ─── Base Styles ───────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(
+    135deg,
+    var(--color-surface-950) 0%,
+    oklch(0.12 0.03 270) 40%,
+    oklch(0.14 0.04 260) 70%,
+    var(--color-surface-950) 100%
+  );
+  color: oklch(0.92 0.01 280);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Glass Effect Utilities ────────────────────────────── */
+.glass {
+  background: oklch(0.18 0.02 275 / 0.6);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+.glass-light {
+  background: oklch(0.22 0.02 275 / 0.5);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid oklch(1 0 0 / 0.1);
+}
+
+.glass-strong {
+  background: oklch(0.15 0.02 275 / 0.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid oklch(1 0 0 / 0.12);
+}
+
+/* ─── Gradient Text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-brand-300), var(--color-accent-400), var(--color-brand-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Glow Effects ───────────────────────────────────────── */
+.glow-brand {
+  box-shadow:
+    0 0 20px oklch(0.58 0.22 268 / 0.15),
+    0 0 60px oklch(0.58 0.22 268 / 0.05);
+}
+
+.glow-success {
+  box-shadow:
+    0 0 20px oklch(0.72 0.19 145 / 0.2),
+    0 0 60px oklch(0.72 0.19 145 / 0.08);
+}
+
+.glow-danger {
+  box-shadow:
+    0 0 20px oklch(0.65 0.22 25 / 0.2),
+    0 0 60px oklch(0.65 0.22 25 / 0.08);
+}
+
+/* ─── Card Styles ────────────────────────────────────────── */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 40px oklch(0 0 0 / 0.3),
+    0 0 30px oklch(0.58 0.22 268 / 0.08);
+  border-color: oklch(1 0 0 / 0.15);
+}
+
+/* ─── Flashcard 3D Flip ──────────────────────────────────── */
+.perspective {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.40 0.02 275);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.50 0.02 275);
+}
+
+/* ─── Pulse Animations ───────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ─── Loading Skeleton ───────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(0.20 0.02 275) 25%,
+    oklch(0.28 0.02 275) 50%,
+    oklch(0.20 0.02 275) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── Drop Zone & Form Controls ──────────────────────────── */
+.dropzone-active {
+  border-color: var(--color-brand-400) !important;
+  background: oklch(0.58 0.22 268 / 0.08) !important;
+}
+
+.input-viva-textarea {
+  background-color: oklch(0.15 0.02 275 / 0.5);
+  color: oklch(0.92 0.01 280 / 0.85);
+  border: 1px solid oklch(1 1 1 / 0.1);
+}
+.input-viva-textarea::placeholder {
+  color: oklch(1 1 1 / 0.25);
+}
+.input-viva-textarea:focus {
+  border-color: oklch(0.58 0.22 268 / 0.4);
+}
+
+.input-notes-textarea {
+  background-color: oklch(0.15 0.02 275 / 0.5);
+  color: oklch(0.92 0.01 280 / 0.9);
+  border: 1px solid oklch(1 1 1 / 0.1);
+}
+.input-notes-textarea::placeholder {
+  color: oklch(1 1 1 / 0.25);
+}
+.input-notes-textarea:focus {
+  border-color: oklch(0.58 0.22 268 / 0.4);
+}
+
+/* ─── Toast Overrides ────────────────────────────────────── */
+[data-sonner-toaster] {
+  font-family: var(--font-sans) !important;
+}
+
+/* ─── Noise Texture Overlay ──────────────────────────────── */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
