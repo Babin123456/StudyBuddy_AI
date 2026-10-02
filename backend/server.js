@@ -108,8 +108,9 @@ app.post('/api/generate', upload.single('file'), async (req, res) => {
       });
     }
 
-    // Determine model to use
-    const model = req.body.model || 'gemma:2b';
+    // Determine model to use: use explicit model, or the first available Gemma model, or fallback
+    const availableGemma = health.models?.find(m => m.toLowerCase().includes('gemma'));
+    const model = req.body.model || process.env.OLLAMA_MODEL || availableGemma || 'gemma:2b';
     console.log(`[StudyBuddy] Generating study material with model: ${model}`);
 
     // Generate via Ollama
